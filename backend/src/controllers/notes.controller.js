@@ -1,4 +1,5 @@
 import Note from "../models/note.model.js";
+import { summarizeText } from "../services/genai.services.js";
 
 export const getNote = async (req, res) => {
   try {
@@ -52,5 +53,21 @@ export const updateNote = async (req, res) => {
     }
   } catch (err) {
     res.status(400).json("Error: " + err);
+  }
+};
+
+export const summarizeNote = async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
+    if (note) {
+      const summary = await summarizeText(note.transcript);
+      note.summary = summary;
+      await note.save();
+      res.json({ summary: summary });
+    } else {
+      res.status(404).json("Note not found");
+    }
+  } catch (err) {
+    res.status(500).json("Error: " + err);
   }
 };
