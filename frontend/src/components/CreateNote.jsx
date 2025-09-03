@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { createNote } from "../apis.js";
 function CreateNote() {
   const [listening, setListening] = useState(false);
   const [transcript, setTranscript] = useState("");
@@ -46,8 +46,18 @@ function CreateNote() {
     }
   };
 
+  const sendTranscriptToBackend = async () => {
+    try {
+      await createNote({ transcript: transcript });
+      alert("Transcript sent to backend");
+    } catch (err) {
+      console.error("Error sending to backend:", err);
+      alert("Failed to send transcript");
+    }
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 ">
       <div className="bg-white p-8 rounded-lg  w-full max-w-2xl mx-auto">
         <h3 className="text-3xl font-extrabold text-gray-900 mb-6 text-center">
           Create New Note{" "}
@@ -82,9 +92,20 @@ function CreateNote() {
         )}
 
         {transcript && (
-          <div className="flex justify-center">
-            <button className="bg-black text-white px-6 py-2 mt-4 w-full rounded-lg hover:bg-gray-600">
+          <div className="flex flex-col justify-center">
+            <button
+              className="bg-black text-white px-6 py-2 mt-4 w-full rounded-lg hover:bg-gray-600"
+              onClick={sendTranscriptToBackend}
+            >
               Send Text to Backend
+            </button>
+            <button
+              className="bg-black text-white px-6 py-2 mt-4 w-full rounded-lg hover:bg-gray-600"
+              onClick={() => {
+                setTranscript("");
+              }}
+            >
+              Delete text
             </button>
           </div>
         )}
