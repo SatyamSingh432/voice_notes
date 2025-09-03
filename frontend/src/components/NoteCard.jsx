@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NoteCard = ({ note }) => {
+const NoteCard = ({ note, deleteNoteHandler }) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md mb-4 border border-gray-200 flex flex-col justify-between h-full">
       <div className="flex-grow">
@@ -21,7 +21,12 @@ const NoteCard = ({ note }) => {
         >
           Edit
         </Link>
-        <button className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition duration-200">
+        <button
+          onClick={() => {
+            deleteNoteHandler(note._id);
+          }}
+          className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition duration-200"
+        >
           Delete
         </button>
         <button className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition duration-200">

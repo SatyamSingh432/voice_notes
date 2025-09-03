@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { createNote } from "../apis.js";
+import { useNavigate } from "react-router-dom";
+
 function CreateNote() {
   const [listening, setListening] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [recognition, setRecognition] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
       const SpeechRecognition =
@@ -50,6 +52,12 @@ function CreateNote() {
     try {
       await createNote({ transcript: transcript });
       alert("Transcript sent to backend");
+      navigate("/");
+      setTranscript("");
+      if (recognition) {
+        recognition.stop();
+        setListening(false);
+      }
     } catch (err) {
       console.error("Error sending to backend:", err);
       alert("Failed to send transcript");
