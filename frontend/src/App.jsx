@@ -2,6 +2,7 @@ import { Route, Routes, Link, BrowserRouter } from "react-router-dom";
 
 import NotesList from "./components/NotesList";
 import CreateNote from "./components/CreateNote";
+import EditNote from "./components/EditNote";
 import "./App.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         </Link>
         <Routes>
           <Route path="/" element={<NotesList />} />
+          <Route path="/edit/:id" element={<EditNote />} />
           <Route path="/create" element={<CreateNote />} />
         </Routes>
       </div>
