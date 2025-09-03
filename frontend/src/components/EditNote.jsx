@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { updateNote, getNote } from "../apis.js";
+import { useParams } from "react-router-dom";
+import { updateNote, getNote, summarizeNote } from "../apis.js";
 
 const EditNote = () => {
   const [transcript, setTranscript] = useState("");
   const [summary, setSummary] = useState("");
   const { id } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const data = async () => {
@@ -21,17 +20,21 @@ const EditNote = () => {
 
   const onChangeTranscript = (e) => {
     setTranscript(e.target.value);
-    setSummary("");
   };
 
   const editNoteHandler = async () => {
     const note = {
       transcript: transcript,
-      summary: summary,
+      summary: "",
     };
 
     await updateNote(id, note);
-    navigate("/");
+    setSummary("");
+  };
+
+  const summarizeHandler = async () => {
+    const res = await summarizeNote(id);
+    setSummary(res.data.summary);
   };
 
   return (
@@ -77,7 +80,9 @@ const EditNote = () => {
           <div className="mb-6 flex justify-center">
             <button
               type="button"
+              onClick={summarizeHandler}
               className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-75 transition duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed w-full"
+              disabled={summary ? true : false}
             >
               Generate Summary
             </button>

@@ -29,9 +29,12 @@ const NoteCard = ({ note, deleteNoteHandler }) => {
         >
           Delete
         </button>
-        <button className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition duration-200">
+        <Link
+          to={"/edit/" + note._id}
+          className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition duration-200 cursor-pointer"
+        >
           Generate Summary
-        </button>
+        </Link>
       </div>
     </div>
   );

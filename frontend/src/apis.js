@@ -25,3 +25,7 @@ export const getNote = (id) => {
 export const updateNote = (id, data) => {
   return axios.post(API_URL + "update/" + id, data);
 };
+
+export const summarizeNote = (id) => {
+  return axios.post(API_URL + id + "/summarize");
+};
