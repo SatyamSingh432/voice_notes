@@ -13,3 +13,15 @@ export const createNote = (data) => {
     },
   });
 };
+
+export const deleteNote = (id) => {
+  return axios.delete(API_URL + id);
+};
+
+export const getNote = (id) => {
+  return axios.get(API_URL + id);
+};
+
+export const updateNote = (id, data) => {
+  return axios.post(API_URL + "update/" + id, data);
+};
