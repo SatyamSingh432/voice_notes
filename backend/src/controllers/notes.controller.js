@@ -20,3 +20,21 @@ export const addNote = async (req, res) => {
     res.status(400).json("Error: " + err);
   }
 };
+
+export const getNoteById = async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
+    res.json(note);
+  } catch (err) {
+    res.status(400).json("Error: " + err);
+  }
+};
+
+export const deleteNote = async (req, res) => {
+  try {
+    await Note.findByIdAndDelete(req.params.id);
+    res.json("Note deleted.");
+  } catch (err) {
+    res.status(400).json("Error: " + err);
+  }
+};
