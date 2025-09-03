@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
+import noteRoute from "./routes/notes.route.js";
 
 dotenv.config();
 
@@ -11,9 +12,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("weer");
-});
+app.use("/api/notes", noteRoute);
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
   console.log("Mongodb Connected");
