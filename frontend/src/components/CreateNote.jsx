@@ -51,7 +51,7 @@ function CreateNote() {
   const sendTranscriptToBackend = async () => {
     try {
       await createNote({ transcript: transcript });
-      alert("Transcript sent to backend");
+      alert("Transcript saved");
       navigate("/");
       setTranscript("");
       if (recognition) {
@@ -60,7 +60,7 @@ function CreateNote() {
       }
     } catch (err) {
       console.error("Error sending to backend:", err);
-      alert("Failed to send transcript");
+      alert("Failed to save transcript");
     }
   };
 
@@ -105,7 +105,7 @@ function CreateNote() {
               className="bg-black text-white px-6 py-2 mt-4 w-full rounded-lg hover:bg-gray-600"
               onClick={sendTranscriptToBackend}
             >
-              Send Text to Backend
+              Save Note
             </button>
             <button
               className="bg-black text-white px-6 py-2 mt-4 w-full rounded-lg hover:bg-gray-600"
