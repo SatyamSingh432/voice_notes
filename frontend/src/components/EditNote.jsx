@@ -80,6 +80,25 @@ const EditNote = () => {
               rows="4"
             ></textarea>
           </div>
+
+          <div className="flex items-center gap-1 justify-center mb-4">
+            <button
+              type="button"
+              onClick={editNoteHandler}
+              className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-75 transition duration-200 ease-in-out cursor-pointer w-[90%]"
+            >
+              Save Note
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                navigate("/");
+              }}
+              className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-75 transition duration-200 ease-in-out cursor-pointer w-[90%]"
+            >
+              Back To Home
+            </button>
+          </div>
           <div className="mb-6 flex justify-center">
             <button
               type="button"
@@ -90,24 +109,6 @@ const EditNote = () => {
               disabled={summary ? true : false}
             >
               {isLoading ? "Summarizing...." : "Generate Summary"}
-            </button>
-          </div>
-          <div className="flex items-center gap-1 justify-center">
-            <button
-              type="button"
-              onClick={editNoteHandler}
-              className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-75 transition duration-200 ease-in-out cursor-pointer w-[90%]"
-            >
-              Edit Note
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                navigate("/");
-              }}
-              className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-75 transition duration-200 ease-in-out cursor-pointer w-[90%]"
-            >
-              Cancel
             </button>
           </div>
         </form>

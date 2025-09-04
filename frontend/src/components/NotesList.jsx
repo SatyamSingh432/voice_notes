@@ -4,7 +4,6 @@ import NoteCard from "./NoteCard.jsx";
 
 const NotesList = () => {
   const [notes, setNotes] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [isLoadingList, setIsLoadingList] = useState(false);
 
   useEffect(() => {
@@ -18,9 +17,7 @@ const NotesList = () => {
   }, []);
 
   const deleteNoteHandler = async (id) => {
-    setIsLoading(true);
     await deleteNote(id);
-    setIsLoading(false);
     setNotes(notes.filter((note) => note._id !== id));
   };
 
@@ -37,7 +34,6 @@ const NotesList = () => {
               key={currentnote._id}
               note={currentnote}
               deleteNoteHandler={deleteNoteHandler}
-              isLoading={isLoading}
             />
           ))}
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NoteCard = ({ note, deleteNoteHandler, isLoading }) => {
+const NoteCard = ({ note, deleteNoteHandler }) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md mb-4 border border-gray-200 flex flex-col justify-between h-full">
       <div className="flex-grow">
@@ -23,7 +23,7 @@ const NoteCard = ({ note, deleteNoteHandler, isLoading }) => {
             }}
             className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md w-full text-center cursor-pointer hover:bg-gray-300 transition duration-200"
           >
-            {isLoading ? "Deleting..." : "Delete"}
+            Delete
           </button>
         </div>
 
