@@ -2,6 +2,14 @@
 
 This is a full-stack web application that allows users to record voice notes, transcribe them, and generate AI-powered summaries.
 
+
+https://github.com/user-attachments/assets/d4c60353-8384-408b-8ea9-dab42a5e076b
+
+HD Video Demo -
+```sh
+https://drive.google.com/file/d/1OJhbto-9sO_JWsHjimgo02Ld0WhTaKus/view?usp=sharing
+```
+
 ## Features
 
 - **Record Voice Notes:** Users can record voice notes directly in the browser.
