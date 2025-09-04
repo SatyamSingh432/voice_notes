@@ -5,11 +5,14 @@ import NoteCard from "./NoteCard.jsx";
 const NotesList = () => {
   const [notes, setNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingList, setIsLoadingList] = useState(false);
 
   useEffect(() => {
+    setIsLoadingList(true);
     const data = async () => {
       const res = await getNotes();
       setNotes(res.data);
+      setIsLoadingList(false);
     };
     data();
   }, []);
@@ -17,15 +20,17 @@ const NotesList = () => {
   const deleteNoteHandler = async (id) => {
     setIsLoading(true);
     await deleteNote(id);
-    alert("Note deleted");
     setIsLoading(false);
-
     setNotes(notes.filter((note) => note._id !== id));
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      {notes.length > 0 ? (
+      {isLoadingList ? (
+        <div className="w-full flex justify-center align-middle">
+          <div className="w-9 h-9 border-4 border-gray-300 border-l-transparent rounded-full animate-spin"></div>
+        </div>
+      ) : notes.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {notes.map((currentnote) => (
             <NoteCard
