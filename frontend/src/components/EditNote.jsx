@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { updateNote, getNote, summarizeNote } from "../apis.js";
 
 const EditNote = () => {
   const [transcript, setTranscript] = useState("");
   const [summary, setSummary] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
-
+  const navigate = useNavigate();
   useEffect(() => {
     const data = async () => {
       const res = await getNote(id);
@@ -33,8 +34,10 @@ const EditNote = () => {
   };
 
   const summarizeHandler = async () => {
+    setIsLoading(true);
     const res = await summarizeNote(id);
     setSummary(res.data.summary);
+    setIsLoading(false);
   };
 
   return (
@@ -81,19 +84,30 @@ const EditNote = () => {
             <button
               type="button"
               onClick={summarizeHandler}
-              className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-75 transition duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed w-full"
+              className={`${
+                isLoading ? "bg-red-500" : "bg-black"
+              } hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-75 transition duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed w-full`}
               disabled={summary ? true : false}
             >
-              Generate Summary
+              {isLoading ? "Summarizing...." : "Generate Summary"}
             </button>
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center gap-1 justify-center">
             <button
               type="button"
               onClick={editNoteHandler}
-              className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-75 transition duration-200 ease-in-out cursor-pointer w-full"
+              className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-75 transition duration-200 ease-in-out cursor-pointer w-[90%]"
             >
               Edit Note
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                navigate("/");
+              }}
+              className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-75 transition duration-200 ease-in-out cursor-pointer w-[90%]"
+            >
+              Cancel
             </button>
           </div>
         </form>
