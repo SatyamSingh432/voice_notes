@@ -38,6 +38,7 @@ const EditNote = () => {
     const res = await summarizeNote(id);
     setSummary(res.data.summary);
     setIsLoading(false);
+    navigate("/");
   };
 
   return (
