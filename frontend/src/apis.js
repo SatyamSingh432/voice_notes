@@ -1,6 +1,6 @@
 import axios from "axios";
-
-const API_URL = "http://localhost:8080/api/notes/";
+const API_URL = "https://voice-notes-kojt.onrender.com/api/notes/";
+// const API_URL = "http://localhost:8080/api/notes/";
 
 export const getNotes = () => {
   return axios.get(API_URL);
