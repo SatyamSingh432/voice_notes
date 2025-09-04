@@ -8,15 +8,20 @@ const NoteCard = ({ note, deleteNoteHandler }) => {
         <p className="text-gray-800 text-lg mb-4">
           <span className="font-semibold">Transcript:</span> {note.transcript}
         </p>
+        {note.summary && (
+          <p className="text-gray-700 text-base mb-4">
+            <span className="font-semibold">Summary:</span> {note.summary}
+          </p>
+        )}
       </div>
       <div className="flex flex-col mt-4 gap-2 text-center">
         <div className="flex justify-between gap-4">
-          <Link
+          {/* <Link
             to={"/edit/" + note._id}
             className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md w-full text-center hover:bg-gray-300 transition duration-200"
           >
             Edit
-          </Link>
+          </Link> */}
           <button
             onClick={() => {
               deleteNoteHandler(note._id);
@@ -31,7 +36,7 @@ const NoteCard = ({ note, deleteNoteHandler }) => {
           to={"/edit/" + note._id}
           className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition duration-200 cursor-pointer"
         >
-          Generate Summary
+          Edit & Summarize Page
         </Link>
       </div>
     </div>

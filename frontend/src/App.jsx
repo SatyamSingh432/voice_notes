@@ -16,7 +16,7 @@ function App() {
           to="/create"
           className="block w-[50%] mx-auto  py-4 px-6 bg-black text-white font-bold rounded-lg text-center text-xl mb-8 hover:bg-gray-800 transition duration-200"
         >
-          Start Recording
+          Recording Page
         </Link>
         <Routes>
           <Route path="/" element={<NotesList />} />
